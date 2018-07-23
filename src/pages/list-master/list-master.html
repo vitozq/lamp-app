@@ -1,0 +1,50 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ 'LIST_MASTER_TITLE' | translate }}</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addItem()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    {{this.url}}
+    <ion-item>
+      <button  (click)="scan()" ion-button full>点我扫描</button>
+      <div>
+        扫描结果:{{scanInfo | json }}
+      </div>
+       <button  (click)="test()" ion-button full>跳转</button>
+    </ion-item>
+    <ion-item>
+      <button (click)="getCurrentPosition()" ion-button block>点我获取当前位置</button>
+      <div>
+        当前位置维度:{{currentPosition.latitude|json}}
+        <br>
+        当前位置经度:{{currentPosition.longitude|json}}
+      </div>
+    </ion-item>
+    <ion-item-sliding *ngFor="let item of currentItems">
+      <button ion-item (click)="openItem(item)">
+        <ion-avatar item-start>
+          <img [src]="item.profilePic" />
+        </ion-avatar>
+        <h2>{{item.name}}</h2>
+        <p>{{item.about}}</p>
+        <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
+      </button>
+
+      <ion-item-options>
+        <button ion-button color="danger" (click)="deleteItem(item)">
+          {{ 'DELETE_BUTTON' | translate }}
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
