@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
-
-import { User } from '../../providers';
 import { MainPage } from '../';
+import { Api } from '../../providers/api/api';
 
 @IonicPage()
 @Component({
@@ -11,41 +10,41 @@ import { MainPage } from '../';
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
-  account: { email: string, password: string } = {
-    email: 'test@example.com',
-    password: 'test'
+
+  //默认登录信息
+  account: { username: string, password: string } = {
+    username: '1086',
+    password: '1'
   };
 
-  // Our translated text strings
-  private loginErrorString: string;
-
   constructor(public navCtrl: NavController,
-    public user: User,
+    public api: Api,
     public toastCtrl: ToastController,
     public translateService: TranslateService) {
-
-    this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-      this.loginErrorString = value;
-    })
   }
 
-  // Attempt to login in through our User service
+  /**
+   * 登录
+   */
   doLogin() {
-
-    this.user.login(this.account).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
-    }, (err) => {
-      this.navCtrl.push(MainPage);
-      // Unable to log in
-      let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
+    let seq = this.api.post('login', this.account);
+    seq.subscribe((res: any) => {
+      if(res.success == false || res.status == "error") {
+        //弹出提示消息
+        let toast = this.toastCtrl.create({
+          message: '登录失败。请检查账号信息然后重试。',
+          duration: 3000,//显示时间
+          position: 'top'//弹出方向
+        });
+        toast.present();
+      }else {
+        this.navCtrl.push(MainPage);//登录成功页面跳转
+        //存储登录token.....
+        localStorage.setItem('app_token', res.access_token);
+        console.log(localStorage.getItem('app_token'),"app_token");
+      }
+    }, err => {
+      console.error('ERROR', err);
     });
   }
 }
