@@ -77,7 +77,18 @@ export class ListMasterPage {
    * 扫描二维码
    */
   scan(){
-    this.barcodeScanner.scan().then(barcodeData => {
+    let options = {
+      preferFrontCamera: false,//前置摄像头
+      showFlipCameraButton: true,//翻转摄像头按钮
+      showTorchButton: true,//闪关灯按钮
+      formats: 'QR_CODE',//格式
+      prompt: '扫描中……',//提示文本(Android )
+      orientation: 'portrait',//方向(Android)
+      torchOn: false,//启动闪光灯(Android)
+      resultDisplayDuration: 500,//扫描结果显示时间，默认为1500ms(Android)
+      disableSuccessBeep: true //禁用扫描成功后哔哔声(iOS)
+    };
+    this.barcodeScanner.scan(options).then(barcodeData => {
       console.log('Barcode data', barcodeData);
       this.scanInfo = barcodeData;
       this.navCtrl.push("InstallDevicePage",{barcodeData:barcodeData});

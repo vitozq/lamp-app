@@ -16,7 +16,7 @@
   <ion-list>
     {{this.url}}
     <ion-item>
-      <button  (click)="scan()" ion-button full>点我扫描</button>
+      <button  (click)="scan()" ion-button full><ion-icon name="qr-scanner"></ion-icon></button>
       <div>
         扫描结果:{{scanInfo | json }}
       </div>
