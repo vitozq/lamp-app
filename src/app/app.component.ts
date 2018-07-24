@@ -53,10 +53,7 @@ export class MyApp {
       // this.splashScreen.hide();
       setTimeout(()=>{
 			  this.splashScreen.hide();
-			},100)
-      /*setTimeout(function () {
-        this.splashScreen.hide();
-      }, 100);*/
+			},1000);
     });
     this.initTranslate();
   }
