@@ -14,5 +14,15 @@
 
 
 <ion-content padding>
-
+  <ion-item>
+    <ion-label floating>设备序列号</ion-label>
+    <ion-input type="text" value={{barcodeData}}></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>项目编号</ion-label>
+    <ion-select [(ngModel)]="gender">
+      <ion-option value="f">Female</ion-option>
+      <ion-option value="m">Male</ion-option>
+    </ion-select>
+  </ion-item>
 </ion-content>

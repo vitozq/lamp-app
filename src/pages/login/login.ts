@@ -13,8 +13,8 @@ export class LoginPage {
 
   //默认登录信息
   account: { username: string, password: string } = {
-    username: '1086',
-    password: '1'
+    username: '13077395475',
+    password: '123456'
   };
 
   constructor(public navCtrl: NavController,
@@ -27,6 +27,10 @@ export class LoginPage {
    * 登录
    */
   doLogin() {
+    // this.navCtrl.push(MainPage);//登录成功页面跳转
+
+
+
     let seq = this.api.post('login', this.account);
     seq.subscribe((res: any) => {
       if(res.success == false || res.status == "error") {
@@ -46,5 +50,7 @@ export class LoginPage {
     }, err => {
       console.error('ERROR', err);
     });
+
+
   }
 }

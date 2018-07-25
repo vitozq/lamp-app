@@ -8,9 +8,10 @@
   "LOGIN": "登 录",
   "SIGNUP": "注 册",
 
-  "TAB1_TITLE": "项目",
-  "TAB2_TITLE": "搜索",
-  "TAB3_TITLE": "设置",
+  "TAB0_TITLE": "新装",
+  "TAB1_TITLE": "任务",
+  "TAB2_TITLE": "调试",
+  "TAB3_TITLE": "我的",
 
   "MAP_TITLE": "地图",
 
@@ -28,7 +29,7 @@
 
   "TUTORIAL_SLIDE4_TITLE": "开始学习？",
 
-  "WELCOME_INTRO": "出发，你的下一个强大的 Ionic app",
+  "WELCOME_INTRO": "欢迎进入阳禾路灯APP",
 
   "SETTINGS_TITLE": "设置",
   "SETTINGS_OPTION1": "选项 1",

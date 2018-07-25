@@ -15,13 +15,7 @@
 <ion-content>
   <ion-list>
     {{this.url}}
-    <ion-item>
-      <button  (click)="scan()" ion-button full><ion-icon name="qr-scanner"></ion-icon></button>
-      <div>
-        扫描结果:{{scanInfo | json }}
-      </div>
-       <button  (click)="test()" ion-button full>跳转</button>
-    </ion-item>
+
     <ion-item>
       <button (click)="getCurrentPosition()" ion-button block>点我获取当前位置</button>
       <div>

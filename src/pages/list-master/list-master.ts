@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController } from 'ionic-angular';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Geolocation } from '@ionic-native/geolocation';
 
 import { Item } from '../../models/item';
@@ -16,8 +15,6 @@ export class ListMasterPage {
   //列表item
   currentItems: Item[];
 
-  //二维码信息
-  scanInfo : any;
 
   //当前位置信息
   currentPosition :any ={
@@ -28,7 +25,7 @@ export class ListMasterPage {
   url:any;
 
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController,
-              private barcodeScanner: BarcodeScanner,private geolocation: Geolocation) {
+              private geolocation: Geolocation) {
     this.currentItems = this.items.query();
     this.url = config.ENV.baseUrl;
   }
@@ -73,29 +70,6 @@ export class ListMasterPage {
 	test(){
 		 this.navCtrl.push("InstallDevicePage",{barcodeData:1});
 	}
-  /**
-   * 扫描二维码
-   */
-  scan(){
-    let options = {
-      preferFrontCamera: false,//前置摄像头
-      showFlipCameraButton: true,//翻转摄像头按钮
-      showTorchButton: true,//闪关灯按钮
-      formats: 'QR_CODE',//格式
-      prompt: '扫描中……',//提示文本(Android )
-      orientation: 'portrait',//方向(Android)
-      torchOn: false,//启动闪光灯(Android)
-      resultDisplayDuration: 500,//扫描结果显示时间，默认为1500ms(Android)
-      disableSuccessBeep: true //禁用扫描成功后哔哔声(iOS)
-    };
-    this.barcodeScanner.scan(options).then(barcodeData => {
-      console.log('Barcode data', barcodeData);
-      this.scanInfo = barcodeData;
-      this.navCtrl.push("InstallDevicePage",{barcodeData:barcodeData});
-    }).catch(err => {
-      console.log('Error', err);
-    });
-  }
 
   /**
    * 获取当前位置
