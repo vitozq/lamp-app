@@ -12,7 +12,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Geolocation } from '@ionic-native/geolocation';
 
 import { Items } from '../mocks/providers/items';
-import { Settings, User, Api } from '../providers';
+import { Settings, Api } from '../providers';
 import { MyApp } from './app.component';
 
 // The translate loader needs to know where to load i18n files
@@ -60,7 +60,6 @@ export function provideSettings(storage: Storage) {
   providers: [
     Api,
     Items,
-    User,
     Camera,
     SplashScreen,
     StatusBar,
