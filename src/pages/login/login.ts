@@ -44,7 +44,8 @@ export class LoginPage {
       }else {
         this.navCtrl.push(MainPage);//登录成功页面跳转
         //存储登录token.....
-        localStorage.setItem('app_token', res.access_token);
+        localStorage.setItem("username",this.account.username);
+        localStorage.setItem('app_token', res.token);
         console.log(localStorage.getItem('app_token'),"app_token");
       }
     }, err => {
