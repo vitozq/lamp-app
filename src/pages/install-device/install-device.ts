@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {Geolocation} from '@ionic-native/geolocation';
+import {Item} from "../../models/item";
+import {Api} from '../../providers/api/api';
+import {MainPage} from "../index";
+
 
 
 /**
@@ -15,39 +20,100 @@ import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angula
   templateUrl: 'install-device.html',
 })
 export class InstallDevicePage {
+  //设备序列号
+  snCode: any;
+  //设备型号
+  modelNum: any;
+  //灯瓦数
+  power: any;
+  //灯杆编号
+  postNum: any;
+  //当前位置信息
+  currentPosition: any = {
+    latitude: 0,//维度
+    longitude: 0//经度
+  };
+  //所属街道
+  street: Item[];
+  //电池选择
+  batteryType :Item[];
+  selected: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController,) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public toastCtrl: ToastController,
+              private geolocation: Geolocation,
+              private api: Api) {
+    this.snCode = navParams.get("barcodeData");
+    this.modelNum = navParams.get("modelNum");
+    this.street = navParams.get("street");
+
   }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InstallDevicePage');
   }
-  ionViewLoaded(){
-    let toast = this.toastCtrl.create({
-              message: '登录失败。请检查账号信息然后重试。',
-              duration: 3000,//显示时间
-              position: 'top'//弹出方向
-            });
-            toast.present();
+  ionViewDidEnter(){
+    console.log("进入页面触发")
+    this.getCurrentPosition();
+    console.log(this.currentPosition);
   }
-  //   let seq = this.api.post('login', this.account);
-  //   seq.subscribe((res: any) => {
-  //     if(res.success == false || res.status == "error") {
-  //       //弹出提示消息
-  //       let toast = this.toastCtrl.create({
-  //         message: '登录失败。请检查账号信息然后重试。',
-  //         duration: 3000,//显示时间
-  //         position: 'top'//弹出方向
-  //       });
-  //       toast.present();
-  //     }else {
-  //       this.navCtrl.push(MainPage);//登录成功页面跳转
-  //       //存储登录token.....
-  //       localStorage.setItem('app_token', res.access_token);
-  //       console.log(localStorage.getItem('app_token'),"app_token");
-  //     }
-  //   }, err => {
-  //     console.error('ERROR', err);
-  //   });
-  // }
+  ionViewLoaded() {
+  }
+
+  /**
+   * 注册安装设备
+   */
+  install() {
+    let seq = this.api.post("register", {
+        snCode: this.snCode,
+        medelNum: this.modelNum,
+        power: this.power,
+        postNum: this.postNum,
+        username:localStorage.getItem("username"),
+        batteryType:this.batteryType,
+        currentPosition:this.currentPosition,
+      street:this.selected
+      }
+    );
+    seq.subscribe( (res: any) =>{
+      this.prompt("设备注册成功");
+      this.navCtrl.push(MainPage);
+    },err =>{
+      console.log("失败");
+      console.error('ERROR',err);
+    });
+
+  }
+
+
+  /**
+   * 获取当前位置
+   */
+  getCurrentPosition() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      // resp.coords.latitude
+      // resp.coords.longitude
+      this.currentPosition.latitude = resp.coords.latitude;
+      this.currentPosition.longitude = resp.coords.longitude;
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+    let watch = this.geolocation.watchPosition();
+    watch.subscribe((data) => {
+      // data can be a set of coordinates, or an error (if an error occurred).
+      // data.coords.latitude
+      // data.coords.longitude
+    });
+  }
+
+  prompt(msg){
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,//显示时间
+      position: 'top'//弹出方向
+    });
+    toast.present();
+  }
 }

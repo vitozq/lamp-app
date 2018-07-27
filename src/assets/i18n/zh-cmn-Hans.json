@@ -49,7 +49,7 @@
   "SIGNUP_TITLE": "注 册",
   "SIGNUP_ERROR": "无法创建账号。请检查账户信息然后重试。",
   "SIGNUP_BUTTON": "注 册",
-
+  "LOGOUT_BUTTON":"退出登录",
   "LIST_MASTER_TITLE": "项目",
 
   "ITEM_CREATE_TITLE": "新项目",

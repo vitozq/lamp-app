@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { App,IonicPage, NavController, ToastController } from 'ionic-angular';
 import { MainPage } from '../';
 import { Api } from '../../providers/api/api';
 
@@ -20,7 +20,8 @@ export class LoginPage {
   constructor(public navCtrl: NavController,
     public api: Api,
     public toastCtrl: ToastController,
-    public translateService: TranslateService) {
+    public translateService: TranslateService,
+              private app:App ) {
   }
 
   /**
@@ -42,6 +43,7 @@ export class LoginPage {
         });
         toast.present();
       }else {
+        this.app.getRootNav().setRoot(MainPage);
         this.navCtrl.push(MainPage);//登录成功页面跳转
         //存储登录token.....
         localStorage.setItem("username",this.account.username);

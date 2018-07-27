@@ -15,14 +15,61 @@
 
 <ion-content padding>
   <ion-item>
-    <ion-label floating>设备序列号</ion-label>
-    <ion-input type="text" value={{barcodeData}}></ion-input>
+    <ion-label floating>设备型号</ion-label>
+    <ion-input type="text"  [(ngModel)]="modelNum" ></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label>项目编号</ion-label>
-    <ion-select [(ngModel)]="gender">
-      <ion-option value="f">Female</ion-option>
-      <ion-option value="m">Male</ion-option>
+    <ion-label floating>设备序列号</ion-label>
+    <ion-input type="text" [(ngModel)]="snCode"></ion-input>
+  </ion-item>
+  <!--<ion-item>-->
+    <!--<ion-label floating>经纬度</ion-label>-->
+    <!--<ion-input type="text" [(ngModel)]="currentPosition.longitude+','+currentPosition.latitude"></ion-input>-->
+  <!--</ion-item>-->
+  <ion-item>
+    <ion-label floating>经度</ion-label>
+    <ion-input type="text" [(ngModel)]="currentPosition" value=[currentPosition.longitude]></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>纬度</ion-label>
+    <ion-input type="text" [(ngModel)]="currentPosition" value=[currentPosition.latitude]></ion-input>
+  </ion-item>
+  <!--<ion-item>-->
+    <!--<ion-label floating>经纬度</ion-label>-->
+    <!--<ion-input type="text" value={{currentPosition.longitude+''+currentPosition.latitude}}></ion-input>-->
+  <!--</ion-item>-->
+
+    <!--<ion-item>-->
+  <!--<ion-label>项目编号</ion-label>-->
+  <!--<ion-select [(ngModel)]="gender">-->
+  <!--<ion-option value="f">Female</ion-option>-->
+  <!--<ion-option value="m">Male</ion-option>-->
+  <!--</ion-select>-->
+  <!--</ion-item>-->
+  <ion-item>
+    <ion-label floating>灯瓦数</ion-label>
+    <ion-input type="text" [(ngModel)]="power"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>灯杆编号</ion-label>
+    <ion-input type="text" [(ngModel)]="postNum"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>电池信息</ion-label>
+    <ion-select [(ngModel)]="batteryType">
+      <ion-option value="li">锂电池</ion-option>
+      <ion-option value="xu">蓄电池</ion-option>
     </ion-select>
   </ion-item>
+  <ion-item>
+    <ion-label>所属街道</ion-label>
+    <ion-select  [(ngModel)]="selected" >
+      <ion-option *ngFor="let item of street" value="{{item}}">{{item}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+
+  <div padding>
+    <button ion-button color="primary" block (click)="install()">安装设备</button>
+  </div>
 </ion-content>

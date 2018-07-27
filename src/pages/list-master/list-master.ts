@@ -67,9 +67,9 @@ export class ListMasterPage {
   }
 
 
-	test(){
-		 this.navCtrl.push("InstallDevicePage",{barcodeData:1});
-	}
+	// test(){
+	// 	 this.navCtrl.push("InstallDevicePage",{barcodeData:1});
+	// }
 
   /**
    * 获取当前位置

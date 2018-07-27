@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams ,ToastController} from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { Api } from '../../providers/api/api';
 /**
  * Generated class for the InstallTabPage page.
  *
@@ -17,11 +18,16 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 export class InstallTabPage {
   //二维码信息
   scanInfo : any;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams,private barcodeScanner:BarcodeScanner) {
+  result:any;
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private barcodeScanner:BarcodeScanner,
+              private api:Api,
+              public  toastCtrl :ToastController) {
   }
 
   ionViewDidLoad() {
+    this.getStreetInfo();
     console.log('ionViewDidLoad InstallTabPage');
   }
 
@@ -41,12 +47,60 @@ export class InstallTabPage {
       disableSuccessBeep: true //禁用扫描成功后哔哔声(iOS)
     };
     this.barcodeScanner.scan(options).then(barcodeData => {
-      console.log('Barcode data', barcodeData);
       this.scanInfo = barcodeData;
-      this.navCtrl.push("InstallDevicePage",{barcodeData:barcodeData});
+      this.forward(barcodeData.text);
     }).catch(err => {
       console.log('Error', err);
     });
   }
 
+  test1(){
+    this.forward("a123");
+  }
+  forward(barcodeData){
+    let seq =  this.api.post("getDeviceBySnCode",barcodeData);
+    seq.subscribe((res: any) => {
+      if(res!=null){
+        // console.log(barcodeData+res.modelNum);
+        this.navCtrl.push("InstallDevicePage",{barcodeData:barcodeData,modelNum:res.modelNum,street:this.result});
+        /** 禁止重复安装注册**/
+        // if(res.deviceId==null||res.deviceId==''){
+        //   this.navCtrl.push("InstallDevicePage",{barcodeData:barcodeData,modelNum:res.modelNum,street:this.result});
+        // }
+        // else{
+        //     this.prompt("该设备已经成功安装，请不要重复安装");
+        // }
+      }else{
+        this.prompt('未在平台找到该设备,请联系项目管理员!');
+
+      }
+    },err =>{
+      console.error('ERROR', err);
+    });
+  }
+
+
+  /**
+   * 获取项目所属街道信息
+   */
+  getStreetInfo(){
+       let username= localStorage.getItem("username");
+       let seq=this.api.post("getStreetInfo",username);
+       seq.subscribe( (res: any) =>{
+         // console.log("res"+res);
+         this.result=res;
+         // console.log("result"+this.result);
+    },err =>{
+        console.error('ERROR',err);
+       });
+  }
+
+  prompt(msg){
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,//显示时间
+      position: 'top'//弹出方向
+    });
+    toast.present();
+  }
 }

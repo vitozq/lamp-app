@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
 
-import { FirstRunPage } from '../pages';
+import {LoginPage, MainPage} from '../pages';
 import { Settings } from '../providers';
 
 @Component({
@@ -27,7 +27,7 @@ import { Settings } from '../providers';
   <ion-nav #content [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage = FirstRunPage;
+  rootPage = MainPage;
 
   @ViewChild(Nav) nav: Nav;
 
@@ -46,6 +46,8 @@ export class MyApp {
   ]
 
   constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
+
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -56,6 +58,10 @@ export class MyApp {
 			},1000);
     });
     this.initTranslate();
+    if(localStorage.getItem("app_token")==null||localStorage.getItem("app_token")==''){
+      console.log("登录token"+localStorage.getItem("token"));
+          this.rootPage=LoginPage;
+    }
   }
 
   initTranslate() {

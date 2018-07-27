@@ -92,4 +92,9 @@ export class SettingsPage {
   ngOnChanges() {
     console.log('Ng All Changes');
   }
+
+  LogOut(){
+    localStorage.removeItem("app_token");
+    this.navCtrl.push("LoginPage");
+  }
 }
