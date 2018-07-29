@@ -1,13 +1,22 @@
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>{{ 'LIST_MASTER_TITLE' | translate }}</ion-title>
+  <ion-navbar class="bar-stable" text-center>
+    <div class="row head-tab">
+      <div class="col head-item" [ngClass]="{'active': status == 'new'}"
+           (click)="changeTab('new')" ><!--数据加载完成的时候才能切换tab-->
+        新任务
+      </div>
+      <div class="col head-item" [ngClass]="{'active': status == 'hasDone'}"
+         (click)="changeTab('hasDone')">
+        已完成
+      </div>
+    </div>
+    <!--<ion-title>{{ 'LIST_MASTER_TITLE' | translate }}</ion-title>
 
     <ion-buttons end>
       <button ion-button icon-only (click)="addItem()">
         <ion-icon name="add"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons>-->
   </ion-navbar>
 
 </ion-header>

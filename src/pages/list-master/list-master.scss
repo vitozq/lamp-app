@@ -1,3 +1,32 @@
 page-list-master {
-
+  .bar-stable{
+    font-size: 16px;
+    color: #4c4c4c;
+    padding: 0px;
+    .head-tab{
+      padding: 0;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      .row{
+        padding: 0px;
+        .col{
+          padding:0px;
+        }
+      }
+      .head-item {
+        padding: 0;
+        //width: 60px;
+        align-self: center;
+        text-align: center;
+        line-height: 44px;
+      }
+      .head-item.active {
+        //border-bottom: 3px solid #0092da;
+        //color: #0092da;
+        border-bottom: 3px solid RGB(100,195,202);
+        color: RGB(100,195,202);
+      }
+    }
+  }
 }

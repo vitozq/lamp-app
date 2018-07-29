@@ -15,6 +15,8 @@ export class ListMasterPage {
   //列表item
   currentItems: Item[];
 
+  //tab页面状态
+  status:String = 'new';
 
   //当前位置信息
   currentPosition :any ={
@@ -34,6 +36,15 @@ export class ListMasterPage {
    * The view loaded, let's query our items for the list
    */
   ionViewDidLoad() {
+  }
+
+
+  /**
+   * 切换tab页面
+   */
+  changeTab(status){
+    this.status = status;
+    //清空列表数据，重新根据状态加载数据
   }
 
   /**
