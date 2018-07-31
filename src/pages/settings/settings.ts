@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { App,IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Settings } from '../../providers';
+import {SignupPage} from "../signup/signup";
 
 /**
  * The Settings page is a simple form that syncs with a Settings provider
@@ -98,4 +99,9 @@ export class SettingsPage {
     this.appCtrl.getRootNav().push("LoginPage");
     // this.navCtrl.push("LoginPage");
   }
+
+  modifyPassoword(){
+    this.navCtrl.push("SignupPage");
+  }
+
 }

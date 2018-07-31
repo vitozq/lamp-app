@@ -47,6 +47,8 @@
   <div  class="divPhoto">
     <img   src="../../assets/imgs/photo.png">
   </div>
+  <ion-item>
+</ion-item>
   <form [formGroup]="form" *ngIf="settingsReady">
   <ion-item>
     <ion-label>声音开关</ion-label>
@@ -54,7 +56,7 @@
   </ion-item>
     <ion-item>
       <ion-label>密码修改</ion-label>
-      <ion-toggle formControlName="option1"></ion-toggle>
+      <ion-label  class="divImg" (click)="modifyPassoword()" ><img  src="../../assets/imgs/modifyPassword.png"  style="width: 20px;height: 20px; " ></ion-label>
     </ion-item>
   </form>
   <div padding>

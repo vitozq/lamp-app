@@ -43,11 +43,11 @@ export class ListMasterPage {
   ionViewDidLoad() {
   }
   ionViewDidEnter(){
-      this.getCurrentFault(1);
-    this.newFault=this.currentItems;
-    this.getCurrentFault(0);
-    this.hasDoneFault=this.currentItems;
-    console.log(this.newFault);
+    //   this.getCurrentFault(1);
+    // this.newFault=this.currentItems;
+    // this.getCurrentFault(0);
+    // this.hasDoneFault=this.currentItems;
+    // console.log(this.newFault);
   }
 
   /**

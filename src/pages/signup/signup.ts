@@ -10,12 +10,14 @@ import { MainPage } from '../';
 })
 export class SignupPage {
 
-  account: { name: string, email: string, password: string } = {
-    name: 'Test Human',
-    email: 'test@example.com',
-    password: 'test'
-  };
-  
+  oldPassword:any;
+  newPassword:any;
+  // account: { name: string, email: string, password: string } = {
+  //   name: 'Test Human',
+  //   email: 'test@example.com',
+  //   password: 'test'
+  // };
+
   constructor(public navCtrl: NavController,
     public toastCtrl: ToastController) {
   }

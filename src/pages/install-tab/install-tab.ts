@@ -19,11 +19,15 @@ export class InstallTabPage {
   //二维码信息
   scanInfo : any;
   result:any;
+  device:any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private barcodeScanner:BarcodeScanner,
               private api:Api,
               public  toastCtrl :ToastController) {
+
+    this.device=this.navParams.get("device");
+
   }
 
   ionViewDidLoad() {

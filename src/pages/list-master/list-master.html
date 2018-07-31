@@ -35,9 +35,15 @@
     <!--</ion-item>-->
     <ion-item-sliding *ngFor="let item of currentItems">
       <button ion-item (click)="openItem(item)">
-        <ion-avatar item-start>
-          <img [src]="item" />
-        </ion-avatar>
+        <ion-item >
+          <div style="position:relative">
+            <img src="../../assets/imgs/task/biaoti.png" style="width: 40px;">
+           <div style="position:absolute; z-index:2; left:10px; top:0px ;color: white">11</div>
+          </div>
+        </ion-item>
+        <!--<ion-avatar item-start>-->
+          <!--<img [src]="item.profilePic" />-->
+        <!--</ion-avatar>-->
         <div ><h2 >设备ID</h2><p >{{item.deviceId}}</p></div>
         <div ><h2 >项目名称</h2><p >{{item.belongPgm}}</p></div>
         <div ><h2 >故障原因</h2><p>{{item.frType}}</p></div>

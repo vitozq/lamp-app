@@ -3,7 +3,7 @@ import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angula
 import {Geolocation} from '@ionic-native/geolocation';
 import {Item} from "../../models/item";
 import {Api} from '../../providers/api/api';
-import {MainPage} from "../index";
+import {Tab0Root} from "../index";
 
 
 
@@ -79,7 +79,7 @@ export class InstallDevicePage {
     );
     seq.subscribe( (res: any) =>{
       this.prompt("设备注册成功");
-      this.navCtrl.push(MainPage);
+      this.navCtrl.push(Tab0Root,{device:res});
     },err =>{
       console.log("失败");
       console.error('ERROR',err);
@@ -106,6 +106,7 @@ export class InstallDevicePage {
       // data.coords.latitude
       // data.coords.longitude
     });
+    // console.log("获取当前纬度"+this.currentPosition.latitude);
   }
 
   prompt(msg){
