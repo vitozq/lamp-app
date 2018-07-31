@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController } from 'ionic-angular';
+import { IonicPage, ModalController, NavController,ToastController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
-
+import {Api} from "../../providers";
 import { Item } from '../../models/item';
 import { Items } from '../../providers';
 import  * as config  from '../../config/config-env';
@@ -14,7 +14,8 @@ import  * as config  from '../../config/config-env';
 export class ListMasterPage {
   //列表item
   currentItems: Item[];
-
+  newFault:any;
+  hasDoneFault:any;
   //tab页面状态
   status:String = 'new';
 
@@ -26,8 +27,12 @@ export class ListMasterPage {
 
   url:any;
 
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController,
-              private geolocation: Geolocation) {
+  constructor(public navCtrl: NavController,
+              public items: Items,
+              public modalCtrl: ModalController,
+              private geolocation: Geolocation,
+              private api:Api,
+              private toastCtrl :ToastController) {
     this.currentItems = this.items.query();
     this.url = config.ENV.baseUrl;
   }
@@ -37,7 +42,13 @@ export class ListMasterPage {
    */
   ionViewDidLoad() {
   }
-
+  ionViewDidEnter(){
+      this.getCurrentFault(1);
+    this.newFault=this.currentItems;
+    this.getCurrentFault(0);
+    this.hasDoneFault=this.currentItems;
+    console.log(this.newFault);
+  }
 
   /**
    * 切换tab页面
@@ -45,6 +56,11 @@ export class ListMasterPage {
   changeTab(status){
     this.status = status;
     //清空列表数据，重新根据状态加载数据
+    if(status=='new'){
+      this.currentItems=this.newFault;
+    }else{
+      this.currentItems=this.hasDoneFault;
+    }
   }
 
   /**
@@ -77,8 +93,24 @@ export class ListMasterPage {
     });
   }
 
+  getCurrentFault(currentStatus) {
+    let seq = this.api.post("getAllFault", {
+        username:localStorage.getItem("username"),
+      currentStatus:currentStatus
+      }
+    );
+    seq.subscribe( (res: any) =>{
+      this.currentItems=res;
+      console.log(this.currentItems.length);
+    },err =>{
+      console.error('ERROR',err);
+    });
 
-	// test(){
+  }
+
+
+
+  // test(){
 	// 	 this.navCtrl.push("InstallDevicePage",{barcodeData:1});
 	// }
 
@@ -101,4 +133,15 @@ export class ListMasterPage {
       // data.coords.longitude
     });
   }
+
+
+  prompt(msg){
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,//显示时间
+      position: 'top'//弹出方向
+    });
+    toast.present();
+  }
+
 }

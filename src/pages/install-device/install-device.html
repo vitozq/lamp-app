@@ -22,18 +22,18 @@
     <ion-label floating>设备序列号</ion-label>
     <ion-input type="text" [(ngModel)]="snCode"></ion-input>
   </ion-item>
+  <ion-item>
+    <ion-label floating>经纬度</ion-label>
+    <ion-input type="text" [(ngModel)]="currentPosition.longitude+','+currentPosition.latitude"></ion-input>
+  </ion-item>
   <!--<ion-item>-->
-    <!--<ion-label floating>经纬度</ion-label>-->
-    <!--<ion-input type="text" [(ngModel)]="currentPosition.longitude+','+currentPosition.latitude"></ion-input>-->
+    <!--<ion-label floating>经度</ion-label>-->
+    <!--<ion-input type="text" [(ngModel)]="currentPosition" value=[currentPosition.longitude]></ion-input>-->
   <!--</ion-item>-->
-  <ion-item>
-    <ion-label floating>经度</ion-label>
-    <ion-input type="text" [(ngModel)]="currentPosition" value=[currentPosition.longitude]></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>纬度</ion-label>
-    <ion-input type="text" [(ngModel)]="currentPosition" value=[currentPosition.latitude]></ion-input>
-  </ion-item>
+  <!--<ion-item>-->
+    <!--<ion-label floating>纬度</ion-label>-->
+    <!--<ion-input type="text" [(ngModel)]="currentPosition" value=[currentPosition.latitude]></ion-input>-->
+  <!--</ion-item>-->
   <!--<ion-item>-->
     <!--<ion-label floating>经纬度</ion-label>-->
     <!--<ion-input type="text" value={{currentPosition.longitude+''+currentPosition.latitude}}></ion-input>-->

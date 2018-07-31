@@ -57,7 +57,7 @@ export class InstallDevicePage {
   ionViewDidEnter(){
     console.log("进入页面触发")
     this.getCurrentPosition();
-    console.log(this.currentPosition);
+    console.log(this.currentPosition.latitude);
   }
   ionViewLoaded() {
   }

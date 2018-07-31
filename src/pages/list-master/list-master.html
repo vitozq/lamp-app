@@ -25,22 +25,23 @@
   <ion-list>
     {{this.url}}
 
-    <ion-item>
-      <button (click)="getCurrentPosition()" ion-button block>点我获取当前位置</button>
-      <div>
-        当前位置维度:{{currentPosition.latitude|json}}
-        <br>
-        当前位置经度:{{currentPosition.longitude|json}}
-      </div>
-    </ion-item>
+    <!--<ion-item>-->
+      <!--<button (click)="getCurrentPosition()" ion-button block>点我获取当前位置</button>-->
+      <!--<div>-->
+        <!--当前位置维度:{{currentPosition.latitude|json}}-->
+        <!--<br>-->
+        <!--当前位置经度:{{currentPosition.longitude|json}}-->
+      <!--</div>-->
+    <!--</ion-item>-->
     <ion-item-sliding *ngFor="let item of currentItems">
       <button ion-item (click)="openItem(item)">
         <ion-avatar item-start>
-          <img [src]="item.profilePic" />
+          <img [src]="item" />
         </ion-avatar>
-        <h2>{{item.name}}</h2>
-        <p>{{item.about}}</p>
-        <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
+        <div ><h2 >设备ID</h2><p >{{item.deviceId}}</p></div>
+        <div ><h2 >项目名称</h2><p >{{item.belongPgm}}</p></div>
+        <div ><h2 >故障原因</h2><p>{{item.frType}}</p></div>
+        <!--<ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>-->
       </button>
 
       <ion-item-options>
