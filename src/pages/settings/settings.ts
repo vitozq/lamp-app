@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { App,IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController,App,IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Settings } from '../../providers';
-import {SignupPage} from "../signup/signup";
 
 /**
  * The Settings page is a simple form that syncs with a Settings provider
@@ -18,7 +17,7 @@ import {SignupPage} from "../signup/signup";
 export class SettingsPage {
   // Our local settings object
   options: any;
-
+  realName:any;
   settingsReady = false;
 
   form: FormGroup;
@@ -39,7 +38,11 @@ export class SettingsPage {
     public formBuilder: FormBuilder,
     public navParams: NavParams,
     public appCtrl: App,
-    public translate: TranslateService) {
+    public translate: TranslateService,
+            public alertCtrl:  AlertController) {
+    if(localStorage.getItem("realName")!=null){
+    this.realName=localStorage.getItem("realName");
+    }
   }
 
   _buildForm() {
@@ -95,13 +98,33 @@ export class SettingsPage {
   }
 
   LogOut(){
-    localStorage.removeItem("app_token");
-    this.appCtrl.getRootNav().push("LoginPage");
+
+    const confirm = this.alertCtrl.create({
+      title: "",
+      message: "确定是否注销账号？",
+      buttons: [
+        {
+          text: '取消',
+          handler: () => {
+          }
+        },
+        {
+          text: '确定',
+          handler: () => {
+            localStorage.removeItem("app_token");
+            this.appCtrl.getRootNav().push("LoginPage");
+          }
+        }
+      ]
+    });
+    confirm.present();
+
+
+
     // this.navCtrl.push("LoginPage");
   }
 
   modifyPassoword(){
     this.navCtrl.push("SignupPage");
   }
-
 }

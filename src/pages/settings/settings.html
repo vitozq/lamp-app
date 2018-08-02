@@ -44,9 +44,12 @@
 
 
 
-  <div  class="divPhoto">
-    <img   src="../../assets/imgs/photo.png">
+  <div  class="divPhoto" >
+    <div><img   src="assets/imgs/photo.png"></div>
+
+    <div style="position:absolute; z-index:1; left:10px; top:0px ;color: white">{{realName}}</div>
   </div>
+
   <ion-item>
 </ion-item>
   <form [formGroup]="form" *ngIf="settingsReady">
@@ -56,7 +59,7 @@
   </ion-item>
     <ion-item>
       <ion-label>密码修改</ion-label>
-      <ion-label  class="divImg" (click)="modifyPassoword()" ><img  src="../../assets/imgs/modifyPassword.png"  style="width: 20px;height: 20px; " ></ion-label>
+      <ion-label  class="divImg" (click)="modifyPassoword()" ><img  src="assets/imgs/modifyPassword.png"  style="width: 20px;height: 20px; " ></ion-label>
     </ion-item>
   </form>
   <div padding>

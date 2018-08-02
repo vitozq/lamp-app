@@ -56,11 +56,11 @@ export class ListMasterPage {
   changeTab(status){
     this.status = status;
     //清空列表数据，重新根据状态加载数据
-    if(status=='new'){
-      this.currentItems=this.newFault;
-    }else{
-      this.currentItems=this.hasDoneFault;
-    }
+    // if(status=='new'){
+    //   this.currentItems=this.newFault;
+    // }else{
+    //   this.currentItems=this.hasDoneFault;
+    // }
   }
 
   /**
@@ -88,7 +88,7 @@ export class ListMasterPage {
    * Navigate to the detail page for this item.
    */
   openItem(item: Item) {
-    this.navCtrl.push('ItemDetailPage', {
+    this.navCtrl.push('ItemInfoPage', {
       item: item
     });
   }

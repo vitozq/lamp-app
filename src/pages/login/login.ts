@@ -13,8 +13,8 @@ export class LoginPage {
 
   //默认登录信息
   account: { username: string, password: string } = {
-    username: '13077395475',
-    password: '123456'
+    username: '',
+    password: ''
   };
 
   constructor(public navCtrl: NavController,
@@ -22,8 +22,11 @@ export class LoginPage {
     public toastCtrl: ToastController,
     public translateService: TranslateService,
               private app:App ) {
+    var temp=localStorage.getItem("username");
+    if(temp!=null&&temp!=""){
+      this.account.username=temp;
+    }
   }
-
   /**
    * 登录
    */
@@ -48,6 +51,8 @@ export class LoginPage {
         //存储登录token.....
         localStorage.setItem("username",this.account.username);
         localStorage.setItem('app_token', res.token);
+        localStorage.setItem('realName', res.realName);
+
         console.log(localStorage.getItem('app_token'),"app_token");
       }
     }, err => {

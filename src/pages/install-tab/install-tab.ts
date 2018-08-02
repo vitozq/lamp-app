@@ -18,7 +18,8 @@ import { Api } from '../../providers/api/api';
 export class InstallTabPage {
   //二维码信息
   scanInfo : any;
-  result:any;
+  street:any;
+  installPower:any;
   device:any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -32,6 +33,7 @@ export class InstallTabPage {
 
   ionViewDidLoad() {
     this.getStreetInfo();
+    this.getInstallPower();
     console.log('ionViewDidLoad InstallTabPage');
   }
 
@@ -66,7 +68,7 @@ export class InstallTabPage {
     seq.subscribe((res: any) => {
       if(res!=null){
         // console.log(barcodeData+res.modelNum);
-        this.navCtrl.push("InstallDevicePage",{barcodeData:barcodeData,modelNum:res.modelNum,street:this.result});
+        this.navCtrl.push("InstallDevicePage",{barcodeData:barcodeData,modelNum:res.modelNum,street:this.street,installPower:this.installPower});
         /** 禁止重复安装注册**/
         // if(res.deviceId==null||res.deviceId==''){
         //   this.navCtrl.push("InstallDevicePage",{barcodeData:barcodeData,modelNum:res.modelNum,street:this.result});
@@ -92,11 +94,19 @@ export class InstallTabPage {
        let seq=this.api.post("getStreetInfo",username);
        seq.subscribe( (res: any) =>{
          // console.log("res"+res);
-         this.result=res;
+         this.street=res;
          // console.log("result"+this.result);
     },err =>{
         console.error('ERROR',err);
        });
+  }
+  getInstallPower(){
+    let seq=this.api.post("getInstallPower","");
+    seq.subscribe( (res: any) =>{
+      this.installPower=res;
+    },err =>{
+      console.error('ERROR',err);
+    });
   }
 
   prompt(msg){

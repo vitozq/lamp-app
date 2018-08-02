@@ -46,9 +46,12 @@
   <!--<ion-option value="m">Male</ion-option>-->
   <!--</ion-select>-->
   <!--</ion-item>-->
+
   <ion-item>
-    <ion-label floating>灯瓦数</ion-label>
-    <ion-input type="text" [(ngModel)]="power"></ion-input>
+    <ion-label>灯瓦数</ion-label>
+    <ion-select  [(ngModel)]="power" >
+      <ion-option *ngFor="let item of installPower" value="{{item}}">{{item}}W</ion-option>
+    </ion-select>
   </ion-item>
   <ion-item>
     <ion-label floating>灯杆编号</ion-label>

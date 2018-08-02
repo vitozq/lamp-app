@@ -8,17 +8,17 @@
 
 
 <ion-content>
-  <form (submit)="doSignup()">
+  <form (submit)="submit()">
     <ion-list>
 
       <ion-item>
         <ion-label fixed>原密码</ion-label>
-        <ion-input type="text"  placeholder="请输入当前登录密码" [(ngModel)]="oldPassword" name="oldPassword"></ion-input>
+        <ion-input type="text"  placeholder="请输入当前登录密码"    [(ngModel)]="oldPassword" name="oldPassword"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label fixed>新密码</ion-label>
-        <ion-input type="password"  placeholder="请输入新密码" [(ngModel)]="newPassword" name="newPassword"></ion-input>
+        <ion-input type="password"  placeholder="请输入新密码"   [(ngModel)]="newPassword" name="newPassword"></ion-input>
       </ion-item>
 
       <!--

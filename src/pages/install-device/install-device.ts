@@ -30,15 +30,15 @@ export class InstallDevicePage {
   postNum: any;
   //当前位置信息
   currentPosition: any = {
-    latitude: 0,//维度
-    longitude: 0//经度
+    latitude: '获取中',//维度
+    longitude: '获取中'//经度
   };
   //所属街道
   street: Item[];
   //电池选择
   batteryType :Item[];
   selected: string;
-
+  installPower:Item[];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public toastCtrl: ToastController,
@@ -47,6 +47,7 @@ export class InstallDevicePage {
     this.snCode = navParams.get("barcodeData");
     this.modelNum = navParams.get("modelNum");
     this.street = navParams.get("street");
+    this.installPower=navParams.get("installPower");
 
   }
 
@@ -55,10 +56,16 @@ export class InstallDevicePage {
     console.log('ionViewDidLoad InstallDevicePage');
   }
   ionViewDidEnter(){
+
+  }
+
+  ngAfterViewInit(){
     console.log("进入页面触发")
     this.getCurrentPosition();
     console.log(this.currentPosition.latitude);
   }
+
+
   ionViewLoaded() {
   }
 
@@ -66,6 +73,8 @@ export class InstallDevicePage {
    * 注册安装设备
    */
   install() {
+    // confirm("是否确认安装设备");
+
     let seq = this.api.post("register", {
         snCode: this.snCode,
         medelNum: this.modelNum,
