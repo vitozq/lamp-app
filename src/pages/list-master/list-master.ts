@@ -33,7 +33,7 @@ export class ListMasterPage {
               private geolocation: Geolocation,
               private api:Api,
               private toastCtrl :ToastController) {
-    this.currentItems = this.items.query();
+    // this.currentItems = this.items.query();
     this.url = config.ENV.baseUrl;
   }
 
@@ -43,24 +43,22 @@ export class ListMasterPage {
   ionViewDidLoad() {
   }
   ionViewDidEnter(){
-    //   this.getCurrentFault(1);
-    // this.newFault=this.currentItems;
-    // this.getCurrentFault(0);
-    // this.hasDoneFault=this.currentItems;
-    // console.log(this.newFault);
+    this.status='new';
+      this.getCurrentFault(1);
+    this.getCurrentFault(0);
   }
 
   /**
    * 切换tab页面
    */
   changeTab(status){
-    this.status = status;
     //清空列表数据，重新根据状态加载数据
-    // if(status=='new'){
-    //   this.currentItems=this.newFault;
-    // }else{
-    //   this.currentItems=this.hasDoneFault;
-    // }
+    this.status = status;
+    if(status=='new'){
+      this.currentItems=this.newFault;
+    }else{
+      this.currentItems=this.hasDoneFault;
+    }
   }
 
   /**
@@ -80,8 +78,8 @@ export class ListMasterPage {
   /**
    * Delete an item from the list of items.
    */
-  deleteItem(item) {
-    this.items.delete(item);
+  sumbit(item) {
+
   }
 
   /**
@@ -100,8 +98,12 @@ export class ListMasterPage {
       }
     );
     seq.subscribe( (res: any) =>{
-      this.currentItems=res;
-      console.log(this.currentItems.length);
+      if(currentStatus==0){
+        this.hasDoneFault=res;
+      }else{
+        this.currentItems=res;
+        this.newFault=res;
+      }
     },err =>{
       console.error('ERROR',err);
     });

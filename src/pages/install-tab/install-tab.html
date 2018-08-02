@@ -28,9 +28,9 @@
   <ion-item   *ngIf="device!=null"  >
   <!--<ion-item id="successInfo" [ngClass]="{'isHidden': device == null}"  >-->
       <table>
-        <tr><th><h1>设备注册成功</h1></th></tr>
+        <tr><th><h1  *ngIf="device.deviceStatus==0">设备注册成功</h1> <h3  *ngIf="device.deviceStatus==1">设备已激活，请勿重新注册</h3></th></tr>
         <tr><td>设备序列号</td><td>{{device.snCode}}</td></tr>
-        <tr><td>设备激活状态</td><td>未激活(未通电)</td></tr>
+        <tr><td>设备激活状态</td><td *ngIf="device.deviceStatus==0">未激活(未通电)</td><td *ngIf="device.deviceStatus==1">已激活</td></tr>
         <tr><td>灯杆编号</td><td>{{device.postNum}}</td></tr>
         <tr><td>经纬度</td><td>{{device.longitudeLatitude}}</td></tr>
         <tr><td>所属街道</td><td>{{device.street}}</td></tr>

@@ -33,31 +33,38 @@
         <!--当前位置经度:{{currentPosition.longitude|json}}-->
       <!--</div>-->
     <!--</ion-item>-->
-    <ion-item-sliding *ngFor="let item of currentItems" style="margin-top: 11px;margin-left: 0px; ">
+    <ion-item-sliding *ngFor="let item of currentItems;let i = index" style="margin-top: 11px;margin-left: 0px; ">
       <button ion-item (click)="openItem(item)" >
           <div style="position:relative">
             <img src="assets/imgs/task/biaoti.png" style="width: 40px;">
-           <div style="position:absolute; z-index:2; left:10px; top:0px ;color: white">11</div>
-            <label style="position:absolute;margin-left: 20px;margin-top: 0px;">2018.7.17  17:46</label>
+           <div style="position:absolute; z-index:2; left:10px; top:0px ;color: white">{{i+1}}</div>
+            <label style="position:absolute;margin-left: 20px;margin-top: 0px;">{{item.crtDate}}</label>
             <img src="assets/imgs/task/alreadyDone.png"  class="alreadyDone" *ngIf="status=='hasDone'">
           </div>
         <!--<ion-avatar item-start>-->
           <!--<img [src]="item.profilePic" />-->
         <!--</ion-avatar>-->
 
-          <div style="border-top: 1px solid #eee;padding-top: 10px" ><img src="assets/imgs/task/shebei.png" class="taskItem"><label style="margin-left: 120px;">设备ID</label><p >{{item.deviceId}}</p></div>
-        <div ><img src="assets/imgs/task/xiangmu.png" class="taskItem"><label style="margin-left: 120px;">项目名称</label><p >{{item.deviceId}}</p></div>
-        <div ><img src="assets/imgs/task/guzhang.png" class="taskItem"><label style="margin-left: 120px;">故障原因</label><p >{{item.deviceId}}</p></div>
+        <div style="border-top: 1px solid #eee;padding-top: 10px"><img src="assets/imgs/task/shebei.png" class="taskItem">
+          <label style="margin-left: 120px;">{{item.postNum}}</label>
+          <!--<p>{{item.deviceId}}</p>-->
+        </div>
+        <div><img src="assets/imgs/task/xiangmu.png" class="taskItem"><label style="margin-left: 120px;">{{item.projectName}}</label>
+          <!--<p>{{item.projectName}}</p>-->
+        </div>
+        <div><img src="assets/imgs/task/guzhang.png" class="taskItem"><label style="margin-left: 120px;">{{item.frDuration}}</label>
+          <!--<p>{{item.frDuration}}</p>-->
+        </div>
         <!--<ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>-->
         <img src="assets/imgs/task/jiantou.png" style="width:30px;position: absolute;top:60px;right: 10px;">
 
       </button>
 
-      <ion-item-options>
-        <button ion-button color="danger" (click)="deleteItem(item)">
-          {{ 'DELETE_BUTTON' | translate }}
-        </button>
-      </ion-item-options>
+      <!--<ion-item-options>-->
+        <!--<button ion-button color="primary" (click)="sumbit(item)">-->
+          <!--完成-->
+        <!--</button>-->
+      <!--</ion-item-options>-->
     </ion-item-sliding>
   </ion-list>
 </ion-content>

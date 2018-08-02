@@ -67,6 +67,10 @@ export class InstallTabPage {
     let seq =  this.api.post("getDeviceBySnCode",barcodeData);
     seq.subscribe((res: any) => {
       if(res!=null){
+        if(res.deviceStatus!=0){
+          this.device=res;
+          this.prompt("该设备已经被注册过，请勿重新安装!")
+        }else{
         // console.log(barcodeData+res.modelNum);
         this.navCtrl.push("InstallDevicePage",{barcodeData:barcodeData,modelNum:res.modelNum,street:this.street,installPower:this.installPower});
         /** 禁止重复安装注册**/
@@ -76,6 +80,7 @@ export class InstallTabPage {
         // else{
         //     this.prompt("该设备已经成功安装，请不要重复安装");
         // }
+        }
       }else{
         this.prompt('未在平台找到该设备,请联系项目管理员!');
 

@@ -1,6 +1,6 @@
 export const FirstRunPage = 'TutorialPage';
 // The page the user lands on after opening the app and without a session
-export const LoginPage = 'WelcomePage';
+export const FirstPage = 'WelcomePage';
 
 // The main page the user will see as they use the app over a long period of time.
 // Change this if not using tabs

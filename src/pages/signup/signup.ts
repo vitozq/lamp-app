@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {AlertController , App,IonicPage, NavController, ToastController } from 'ionic-angular';
 import {Api} from "../../providers";
-import { LoginPage } from '../';
+import { FirstPage } from '../';
 
 @IonicPage()
 @Component({
@@ -46,7 +46,7 @@ export class SignupPage {
         toast.present();
       }else {
         this.showAlert("","密码修改成功!");
-        this.app.getRootNav().setRoot(LoginPage);
+        this.app.getRootNav().setRoot(FirstPage);
         //清除登录Token
         localStorage.removeItem('app_token');
       }
