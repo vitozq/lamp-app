@@ -23,6 +23,7 @@
 
 <ion-content style="background-color: #eeeeee">
   <ion-list>
+
     <!--{{this.url}}-->
 
     <!--<ion-item>-->
@@ -33,6 +34,7 @@
         <!--当前位置经度:{{currentPosition.longitude|json}}-->
       <!--</div>-->
     <!--</ion-item>-->
+    <ion-label *ngIf="currentItems==''" style="text-align: center">目前暂无任务信息</ion-label>
     <ion-item-sliding *ngFor="let item of currentItems;let i = index" style="margin-top: 11px;margin-left: 0px; ">
       <button ion-item (click)="openItem(item)" >
           <div style="position:relative">

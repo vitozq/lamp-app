@@ -12,8 +12,9 @@ import  * as config  from '../../config/config-env';
   templateUrl: 'list-master.html'
 })
 export class ListMasterPage {
+  isNULL :boolean=false;
   //列表item
-  currentItems: Item[];
+  currentItems: any;
   newFault:any;
   hasDoneFault:any;
   //tab页面状态
@@ -44,7 +45,7 @@ export class ListMasterPage {
   }
   ionViewDidEnter(){
     this.status='new';
-      this.getCurrentFault(1);
+      this.getCurrentFault(2);
     this.getCurrentFault(0);
   }
 
@@ -52,6 +53,7 @@ export class ListMasterPage {
    * 切换tab页面
    */
   changeTab(status){
+
     //清空列表数据，重新根据状态加载数据
     this.status = status;
     if(status=='new'){
@@ -59,6 +61,7 @@ export class ListMasterPage {
     }else{
       this.currentItems=this.hasDoneFault;
     }
+
   }
 
   /**
@@ -100,6 +103,7 @@ export class ListMasterPage {
     seq.subscribe( (res: any) =>{
       if(currentStatus==0){
         this.hasDoneFault=res;
+        // console.log("hasDone"+this.hasDoneFault);
       }else{
         this.currentItems=res;
         this.newFault=res;

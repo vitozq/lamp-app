@@ -21,7 +21,7 @@ import {Tab0Root} from "../index";
 })
 export class InstallDevicePage {
   //设备序列号
-  snCode: any;
+  imeiCode: any;
   //设备型号
   modelNum: any;
   //灯瓦数
@@ -47,7 +47,7 @@ export class InstallDevicePage {
               private geolocation: Geolocation,
               private api: Api,
               private alertCtrl:AlertController) {
-    this.snCode = navParams.get("barcodeData");
+    this.imeiCode = navParams.get("barcodeData");
     this.modelNum = navParams.get("modelNum");
     this.street = navParams.get("street");
     this.installPower=navParams.get("installPower");
@@ -90,7 +90,7 @@ export class InstallDevicePage {
           text: '确定',
           handler: () => {
             let seq = this.api.post("register", {
-                snCode: this.snCode,
+                imeiCode: this.imeiCode,
                 medelNum: this.modelNum,
                 power: this.power,
                 postNum: this.postNum,

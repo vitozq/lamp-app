@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController,IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Api} from "../../providers";
+import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 
 /**
  * Generated class for the ItemInfoPage page.
@@ -19,7 +20,7 @@ export class ItemInfoPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private api:Api,
-              private alertCtrl:AlertController) {
+              private alertCtrl:AlertController,) {
     this.item=this.navParams.get("item");
   }
 
@@ -64,5 +65,28 @@ export class ItemInfoPage {
    }else{
      return false;
    }
+  }
+
+
+  replace(){
+    const confirm = this.alertCtrl.create({
+      title: "",
+      message: "确认是否替换并扫描新设备",
+      buttons: [
+        {
+          text: '取消',
+          handler: () => {
+          }
+        },
+        {
+          text: '确定',
+          handler: () => {
+
+          }
+        }
+      ]
+    });
+    confirm.present();
+
   }
 }

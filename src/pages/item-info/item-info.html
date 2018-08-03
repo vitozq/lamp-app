@@ -15,22 +15,23 @@
 
 <ion-content padding>
   <ion-item>
-      <div style="display: flex">
-          <img style="column:1;" src="assets/imgs/task/guzhangInfo.png" style="width: 40px;height: 40px">
-        <div  style="column:2;row:1;"><label>所属项目</label><label>{{item.projectName}}</label></div>
-        <div style="column:2;row:2;"><label >告警时间</label><label>{{item.crtDate}}</label></div>
+      <div style="display: flex; flex-flow: row wrap;">
+          <img style="columns:1;row:1" src="assets/imgs/task/guzhangInfo.png" style="width: 40px;height: 40px">
+        <div  style="columns:2;row:1;margin-left: 30px"><label>所属项目:</label><label>{{item.projectName}}</label></div>
+        <div style="columns:2;row:1;margin-left: 50px"><label >告警时间:</label><label>{{item.crtDate}}</label></div>
       </div>
     </ion-item>
 
 <ion-item>
    <table>
-     <tr><th>故障ID:</th><td>{{item.frId}}</td></tr>
-     <tr><th>设备灯杆号:</th><td>{{item.postNum}}</td></tr>
+     <tr><th>故 障 ID:</th><td>{{item.frId}}</td></tr>
+     <tr><th>灯 杆 号:</th><td>{{item.postNum}}</td></tr>
      <tr><th>告警信息:</th><td>{{item.frDuration}}</td></tr>
    </table>
 
 </ion-item>
 
   <!--<button ion-button   [ngClass]="{disabled : isDone}" (click)="done">完成</button>-->
-  <button ion-button  [disabled]="isDone()" (click)="done()">完成</button>
+  <button ion-button  [disabled]="isDone()" (click)="replace()" style="margin-left: 50px">替换</button>
+  <button ion-button  [disabled]="isDone()" (click)="done()" style="margin-left: 120px">完成</button>
 </ion-content>

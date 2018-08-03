@@ -1,50 +1,22 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams ,ToastController} from 'ionic-angular';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { Api} from '../../providers/api/api';
+import { Injectable } from '@angular/core';
+import {BarcodeScanner} from "@ionic-native/barcode-scanner";
+import {Api} from "../api/api";
+import {App, NavController, ToastController} from "ionic-angular";
 
-/**
- * Generated class for the InstallTabPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
-@IonicPage()
-@Component({
-  selector: 'page-install-tab',
-  templateUrl: 'install-tab.html',
-})
-
-export class InstallTabPage {
-  //二维码信息
-  scanInfo : any;
+@Injectable()
+export class ForwardInstall {
+  scanInfo:any;
   street:any;
   installPower:any;
   device:any;
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              private barcodeScanner:BarcodeScanner,
-              private api:Api,
-              public  toastCtrl :ToastController,) {
-
-    this.device=this.navParams.get("device");
+  public navCtrl:NavController;
+  constructor(public barcodeScanner:BarcodeScanner,
+              public api:Api,
+              public toastCtrl:ToastController,
+              public app:App
+              ) {
+    this.navCtrl=app.getActiveNav();
   }
-
-  ionViewDidLoad() {
-    // this.device=this.forwardInstall.device;
-    console.log('ionViewDidLoad InstallTabPage');
-  }
-  // scan(){
-  //     this.forwardInstall.scan();
-  // }
-  //
-  //
-  test1(){
-    this.forward("z2");
-    // this.navCtrl.push("InstallDevicePage",{barcodeData:123,modelNum:123,street:this.street,installPower:this.installPower});
-  }
-
   /**
    * 扫描二维码
    */
@@ -133,5 +105,4 @@ export class InstallTabPage {
     });
     toast.present();
   }
-
 }

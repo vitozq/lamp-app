@@ -33,4 +33,9 @@ page-list-master {
       }
     }
   }
+
+//去掉每个item的下边框线
+  .list-md .item-block .item-inner{
+    border-bottom: none;
+  }
 }
