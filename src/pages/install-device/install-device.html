@@ -16,15 +16,15 @@
 <ion-content padding>
   <ion-item>
     <ion-label floating>设备型号</ion-label>
-    <ion-input type="text"  [(ngModel)]="modelNum" ></ion-input>
+    <ion-input type="text"  [(ngModel)]="modelNum" disabled="true" ></ion-input>
   </ion-item>
   <ion-item>
     <ion-label floating>设备序列号</ion-label>
-    <ion-input type="text" [(ngModel)]="snCode"></ion-input>
+    <ion-input type="text" [(ngModel)]="snCode" disabled="true"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label floating>经纬度</ion-label>
-    <ion-input type="text" [(ngModel)]="currentPosition.longitude+','+currentPosition.latitude"></ion-input>
+    <ion-input type="text" [(ngModel)]="currentPosition.longitude+','+currentPosition.latitude" disabled="true"></ion-input>
   </ion-item>
   <!--<ion-item>-->
     <!--<ion-label floating>经度</ion-label>-->
@@ -59,7 +59,7 @@
   </ion-item>
   <ion-item>
     <ion-label>电池信息</ion-label>
-    <ion-select [(ngModel)]="batteryType">
+    <ion-select [(ngModel)]="selectedBattery">
       <ion-option value="li">锂电池</ion-option>
       <ion-option value="xu">蓄电池</ion-option>
     </ion-select>

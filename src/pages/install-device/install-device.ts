@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {AlertController, IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {Geolocation} from '@ionic-native/geolocation';
 import {Item} from "../../models/item";
 import {Api} from '../../providers/api/api';
@@ -33,17 +33,20 @@ export class InstallDevicePage {
     latitude: '获取中',//维度
     longitude: '获取中'//经度
   };
+   confirm;
   //所属街道
   street: Item[];
   //电池选择
   batteryType :Item[];
+  selectedBattery:string;
   selected: string;
   installPower:Item[];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public toastCtrl: ToastController,
               private geolocation: Geolocation,
-              private api: Api) {
+              private api: Api,
+              private alertCtrl:AlertController) {
     this.snCode = navParams.get("barcodeData");
     this.modelNum = navParams.get("modelNum");
     this.street = navParams.get("street");
@@ -73,25 +76,41 @@ export class InstallDevicePage {
    * 注册安装设备
    */
   install() {
-    // confirm("是否确认安装设备");
+    this.validate();
+  this.confirm= this.alertCtrl.create({
+      title: "",
+      message: "确定是否安装设备",
+      buttons: [
+        {
+          text: '取消',
+          handler: () => {
+          }
+        },
+        {
+          text: '确定',
+          handler: () => {
+            let seq = this.api.post("register", {
+                snCode: this.snCode,
+                medelNum: this.modelNum,
+                power: this.power,
+                postNum: this.postNum,
+                username:localStorage.getItem("username"),
+                batteryType:this.selectedBattery,
+                currentPosition:this.currentPosition,
+                street:this.selected
+              }
+            );
+            seq.subscribe( (res: any) =>{
+              this.prompt("设备注册成功");
+              this.navCtrl.push(Tab0Root,{device:res});
+            },err =>{
+              console.log("失败");
+              console.error('ERROR',err);
+            });
 
-    let seq = this.api.post("register", {
-        snCode: this.snCode,
-        medelNum: this.modelNum,
-        power: this.power,
-        postNum: this.postNum,
-        username:localStorage.getItem("username"),
-        batteryType:this.batteryType,
-        currentPosition:this.currentPosition,
-      street:this.selected
-      }
-    );
-    seq.subscribe( (res: any) =>{
-      this.prompt("设备注册成功");
-      this.navCtrl.push(Tab0Root,{device:res});
-    },err =>{
-      console.log("失败");
-      console.error('ERROR',err);
+          }
+        }
+      ]
     });
 
   }
@@ -126,4 +145,30 @@ export class InstallDevicePage {
     });
     toast.present();
   }
+
+  validate(){
+    var error ;
+      if(this.power==null||this.power==''){
+          error='请选择灯瓦数再提交信息';
+      } else if(this.selected==null||this.selected==''){
+        error='请选择街道后再提交信息';
+      }else if(this.selectedBattery==null||this.selectedBattery==''){
+        error='请选择电池后后再提交信息';
+      }else if(this.postNum==null||this.postNum==''){
+        error='请填写灯杆编号后再提交信息';
+      }
+      if(error!=null){
+        const alert = this.alertCtrl.create({
+          title: '提示信息',
+          subTitle:error,
+          buttons: ['确定']
+        });
+        alert.present();
+      }
+      if(error==null){
+        this.confirm.present();
+      }
+  }
+
+
 }

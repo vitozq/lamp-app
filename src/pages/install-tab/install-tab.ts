@@ -62,6 +62,8 @@ export class InstallTabPage {
 
   test1(){
     this.forward("a123");
+
+    // this.navCtrl.push("InstallDevicePage",{barcodeData:123,modelNum:123,street:this.street,installPower:this.installPower});
   }
   forward(barcodeData){
     let seq =  this.api.post("getDeviceBySnCode",barcodeData);
