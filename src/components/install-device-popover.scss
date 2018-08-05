@@ -1,0 +1,39 @@
+install-device-popover{
+  .device-background{
+    background: url(../assets/imgs/popover/background2@2x.png);
+    background-size: cover;
+  }
+
+  .device-title{
+    background: #fff;
+    font-size: 16px;
+    color: color($colors,primary);
+    img{
+      width: 30px;
+    }
+  }
+
+  .device-info{
+    background: #f7f7f7;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    > *{
+      color: color($colors,darkgray);
+    }
+  }
+
+  button{
+    width: 100px !important;
+    height: 35px !important;
+  }
+
+
+  .color-0{
+    color: #000;
+  }
+  .margin-LR5{
+    margin-left: 5px;
+    margin-right: 8px;
+  }
+}

@@ -6,6 +6,8 @@ import { Config, Nav, Platform,Keyboard ,IonicApp,ToastController} from 'ionic-a
 import {FirstPage, MainPage} from '../pages';
 import { Settings } from '../providers';
 import {LoginPage} from "../pages/login/login";
+import {TabsPage} from "../pages/tabs/tabs";
+import {WelcomePage} from "../pages/welcome/welcome";
 
 @Component({
   template: `<ion-nav #content [root]="rootPage"></ion-nav>`
@@ -27,13 +29,17 @@ export class MyApp {
 
 
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+      // 设置状态栏
       this.statusBar.styleDefault();
-      // this.splashScreen.hide();
+      this.statusBar.styleLightContent();
+
+      // 隐藏启动页
       setTimeout(()=>{
 			  this.splashScreen.hide();
 			},1000);
+
+      // 注册返回按键事件
+      this.registerBackButtonAction();
     });
     this.initTranslate();
     if(localStorage.getItem("app_token")==null||localStorage.getItem("app_token")==''){
@@ -100,17 +106,40 @@ export class MyApp {
         //loading的话，返回键无效
         return;
       }
+      // 获取已激活页面
       let activeVC = this.nav.getActive();
+      console.log('activeVC:' + activeVC);
       let page = activeVC.instance;
 
+      if(page instanceof TabsPage){//tab栏页面
+        let tabs = activeVC.instance.tabs;
+        let activeNav = tabs.getSelected();
+        if (!activeNav.canGoBack()) {
+          // 当前页面为tab栏，退出APP
+          return this.showExit();
+        }
+        // 当前页面为tab栏的子页面，正常返回
+        return activeNav.pop();
+      }else if(page instanceof LoginPage || page instanceof WelcomePage){//登录页面、welcome页面直接退出app
+        // 当前页面为tab栏，退出APP
+        return this.showExit();
+      }else{//其他页面
+        if (!this.nav.canGoBack()) {
+          // 当前页面为tabs，退出APP
+          return this.showExit();
+        }
+        // 当前页面为tabs的子页面，正常返回
+        return this.nav.pop();
+      }
+      /*
       if (page instanceof LoginPage ) {
         this.platform.exitApp();
         return;
       }
       let tabs = activeVC.instance.tabs;
       let activeNav = tabs.getSelected();
-      return activeNav.canGoBack() ? activeNav.pop() : this.showExit();//另外两种方法在这里将this.showExit()改为其他两种的方法的逻辑就好。
-    }, 1);
+      return activeNav.canGoBack() ? activeNav.pop() : this.showExit();//另外两种方法在这里将this.showExit()改为其他两种的方法的逻辑就好。*/
+    }, 101);
   }
 
   //双击退出提示框

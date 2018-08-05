@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import {IonicPage, NavController, Tabs} from 'ionic-angular';
 
 import { Tab0Root,Tab1Root, Tab2Root, Tab3Root } from '../';
 
@@ -10,6 +10,8 @@ import { Tab0Root,Tab1Root, Tab2Root, Tab3Root } from '../';
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
+  @ViewChild('mainTabs') tabs:Tabs;
+
   tab0Root: any = Tab0Root;
   tab1Root: any = Tab1Root;
   tab2Root: any = Tab2Root;

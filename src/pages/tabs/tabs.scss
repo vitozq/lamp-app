@@ -16,14 +16,14 @@ page-tabs {
   $tabImageName: 'tab1' 'tab2' 'tab3';
   @for $i from 1 to 4 {
     //for ios
-    //.ion-ios-tab-#{nth($tabImageName, $i)} {
-    //  @extend .ion-tab-icon-base;
-    //  content: url("../assets/images/tabs/#{nth($tabImageName, $i)}_choosed.png");
-    //}
-    //.ion-ios-tab-#{nth($tabImageName, $i)}-outline {
-    //  @extend .ion-tab-icon-base;
-    //  content: url("../assets/images/tabs/#{nth($tabImageName, $i)}.png");
-    //}
+   /* .ion-ios-tab-#{nth($tabImageName, $i)} {
+      @extend .ion-tab-icon-base;
+      content: url("../assets/imgs/tabs/#{nth($tabImageName, $i)}_choosed.png");
+    }
+    .ion-ios-tab-#{nth($tabImageName, $i)}-outline {
+      @extend .ion-tab-icon-base;
+      content: url("../assets/imgs/tabs/#{nth($tabImageName, $i)}.png");
+    }*/
 
     // for android
     .tabs-md .tab-button[aria-selected=true] {

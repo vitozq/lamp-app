@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams ,ToastController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, PopoverController, ToastController} from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Api} from '../../providers/api/api';
+import {InstallDevicePopover} from "../../components/install-device-popover";
 
 /**
  * Generated class for the InstallTabPage page.
@@ -26,7 +27,8 @@ export class InstallTabPage {
               public navParams: NavParams,
               private barcodeScanner:BarcodeScanner,
               private api:Api,
-              public  toastCtrl :ToastController,) {
+              public  toastCtrl :ToastController,
+              public popoverCtrl:PopoverController) {
 
     this.device=this.navParams.get("device");
   }
@@ -132,6 +134,13 @@ export class InstallTabPage {
       position: 'top'//弹出方向
     });
     toast.present();
+  }
+
+  showPopover(){
+    let popover = this.popoverCtrl.create(InstallDevicePopover,{});
+    popover.present({
+      ev: event
+    });
   }
 
 }

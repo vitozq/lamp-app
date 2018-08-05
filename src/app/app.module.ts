@@ -15,6 +15,7 @@ import { Items } from '../mocks/providers/items';
 import { Settings, Api ,ForwardInstall} from '../providers';
 
 import { MyApp } from './app.component';
+import {ComponentsModule} from "../components/components.module";
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: HttpClient) {
@@ -43,6 +44,7 @@ export function provideSettings(storage: Storage) {
   imports: [
     BrowserModule,
     HttpClientModule,
+    ComponentsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -50,7 +52,12 @@ export function provideSettings(storage: Storage) {
         deps: [HttpClient]
       }
     }),
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{
+      tabsHideOnSubPages: 'true', //隐藏全部子页面tabs
+      // tabsPlacement:'bottom',//tabs（"top", "bottom"）
+      // iconMode:'ios',
+      // mode:'ios',
+    }),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],

@@ -18,3 +18,15 @@
 .toolbar,.toolbar-md{
   min-height: 46px;
 }
+/******************弹框样式***********************/
+ion-backdrop{
+  opacity: 0.09;
+}
+.popover-content {
+  width: 70% !important;
+  top: 140px !important;
+  max-height: 330px !important;
+  left: 15% !important;
+  border-radius: 10px !important;
+  background: #fff !important;//transparent
+}
