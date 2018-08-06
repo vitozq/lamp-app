@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { App,IonicPage, NavController } from 'ionic-angular';
-import { MainPage } from '../';
+import {MainPage} from '../';
 import { Api } from '../../providers/api/api';
 import {CommonService} from "../../service/common.service";
 
@@ -43,8 +43,10 @@ export class LoginPage {
         });
         toast.present();*/
       }else {
+        this.commonService.showToast('登录验证成功，自动进入到首页');
         this.app.getRootNav().setRoot(MainPage);
-        this.navCtrl.push(MainPage);//登录成功页面跳转
+
+        // this.navCtrl.push(Tab0Root);//登录成功页面跳转
         //存储登录token.....
         localStorage.setItem("username",this.account.username);
         localStorage.setItem('app_token', res.token);

@@ -30,7 +30,7 @@ import {NavController, NavParams, ViewController} from 'ionic-angular';
           <ion-col text-left darkgray>
             设备序列号
           </ion-col>
-          <ion-col text-right darkgray>
+          <ion-col text-right darkgray style="white-space: nowrap">
             {{device.imeiCode}}
           </ion-col>
         </ion-row>
