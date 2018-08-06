@@ -100,6 +100,8 @@ export class SignupPage {
       error='两次密码输入不一致';
     }else if(this.newPassword.length<6){
       error='新密码必须大于6位';
+    }else if(this.oldPassword==this.newPassword){
+      error='新密码不能和原密码相同';
     }
     if(error!=null){
       // const alert = this.alertCtrl.create({

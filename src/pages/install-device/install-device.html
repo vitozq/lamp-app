@@ -7,7 +7,8 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>设备安装</ion-title>
+    <ion-title *ngIf="status=='new'">设备安装</ion-title>
+    <ion-title *ngIf="status=='replace'">设备替换</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -55,7 +56,7 @@
   </ion-item>
   <ion-item>
     <ion-label floating>灯杆编号</ion-label>
-    <ion-input type="text" [(ngModel)]="postNum"></ion-input>
+    <ion-input type="text" [(ngModel)]="postNum" ></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>电池信息</ion-label>
