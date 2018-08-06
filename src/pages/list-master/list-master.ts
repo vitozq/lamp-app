@@ -145,7 +145,7 @@ export class ListMasterPage {
     let toast = this.toastCtrl.create({
       message: msg,
       duration: 3000,//显示时间
-      position: 'top'//弹出方向
+      position: 'middle'//弹出方向
     });
     toast.present();
   }

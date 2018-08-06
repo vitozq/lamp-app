@@ -43,7 +43,7 @@ export class InstallTabPage {
   //
   //
   test1(){
-    this.forward("z2");
+    this.forward("868744034082721");
     // this.navCtrl.push("InstallDevicePage",{barcodeData:123,modelNum:123,street:this.street,installPower:this.installPower});
   }
 
@@ -76,13 +76,13 @@ export class InstallTabPage {
     let seq =  this.api.post("getDeviceBySnCode",barcodeData);
     seq.subscribe((res: any) => {
       if(res!=null){
-        if(res.deviceStatus!=0){
+        if(res.deviceId!=null&&res.deviceId!=''){
           this.device=res;
           this.prompt("该设备已经被注册过，请勿重新安装!");
+          this.showPopover({device:res,status:'old'});
         }else{
-          // console.log(barcodeData+res.modelNum);
-          this.navCtrl.push("InstallDevicePage",{barcodeData:barcodeData,modelNum:res.modelNum,street:this.street,installPower:this.installPower});
-          /** 禁止重复安装注册**/
+          this.navCtrl.push("InstallDevicePage",{barcodeData:barcodeData,modelNum:res.modelNum,street:this.street,installPower:this.installPower,status:'new'});
+            /** 禁止重复安装注册**/
           // if(res.deviceId==null||res.deviceId==''){
           //   this.navCtrl.push("InstallDevicePage",{barcodeData:barcodeData,modelNum:res.modelNum,street:this.result});
           // }
@@ -136,10 +136,10 @@ export class InstallTabPage {
     toast.present();
   }
 
-  showPopover(){
-    let popover = this.popoverCtrl.create(InstallDevicePopover,{});
+  showPopover(data){
+    let popover = this.popoverCtrl.create(InstallDevicePopover,{device:data.device,status:data.status});
     popover.present({
-      ev: event
+      // ev: event
     });
   }
 

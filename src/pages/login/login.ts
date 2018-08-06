@@ -42,7 +42,7 @@ export class LoginPage {
         let toast = this.toastCtrl.create({
           message: '登录失败。请检查账号信息然后重试。',
           duration: 3000,//显示时间
-          position: 'top'//弹出方向
+          position: 'middle'//弹出方向
         });
         toast.present();
       }else {
