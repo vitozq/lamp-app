@@ -16,6 +16,7 @@ import { Settings, Api ,ForwardInstall} from '../providers';
 
 import { MyApp } from './app.component';
 import {ComponentsModule} from "../components/components.module";
+import {CommonService} from "../service/common.service";
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: HttpClient) {
@@ -73,6 +74,7 @@ export function provideSettings(storage: Storage) {
     StatusBar,
     BarcodeScanner,
     Geolocation,
+    CommonService,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }

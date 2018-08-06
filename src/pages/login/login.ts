@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { App,IonicPage, NavController, ToastController } from 'ionic-angular';
+import { App,IonicPage, NavController } from 'ionic-angular';
 import { MainPage } from '../';
 import { Api } from '../../providers/api/api';
+import {CommonService} from "../../service/common.service";
 
 @IonicPage()
 @Component({
@@ -18,9 +18,8 @@ export class LoginPage {
   };
 
   constructor(public navCtrl: NavController,
-    public api: Api,
-    public toastCtrl: ToastController,
-    public translateService: TranslateService,
+              public api: Api,
+              public commonService: CommonService,
               private app:App ) {
     var temp=localStorage.getItem("username");
     if(temp!=null&&temp!=""){
@@ -32,19 +31,17 @@ export class LoginPage {
    */
   doLogin() {
     // this.navCtrl.push(MainPage);//登录成功页面跳转
-
-
-
     let seq = this.api.post('login', this.account);
     seq.subscribe((res: any) => {
       if(res.success == false || res.status == "error") {
         //弹出提示消息
-        let toast = this.toastCtrl.create({
+        this.commonService.showToast('登录失败。请检查账号信息然后重试。');
+        /*let toast = this.toastCtrl.create({
           message: '登录失败。请检查账号信息然后重试。',
           duration: 3000,//显示时间
           position: 'top'//弹出方向
         });
-        toast.present();
+        toast.present();*/
       }else {
         this.app.getRootNav().setRoot(MainPage);
         this.navCtrl.push(MainPage);//登录成功页面跳转
@@ -56,6 +53,7 @@ export class LoginPage {
         console.log(localStorage.getItem('app_token'),"app_token");
       }
     }, err => {
+      this.commonService.showToast('登录失败。请检查账号信息然后重试。');
       console.error('ERROR', err);
     });
 
