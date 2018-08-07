@@ -30,7 +30,7 @@ import {NavController, NavParams, ViewController} from 'ionic-angular';
           <ion-col text-left darkgray>
             设备序列号
           </ion-col>
-          <ion-col text-right darkgray style="white-space: nowrap">
+          <ion-col text-right darkgray >
             {{device.imeiCode}}
           </ion-col>
         </ion-row>
@@ -56,10 +56,19 @@ import {NavController, NavParams, ViewController} from 'ionic-angular';
         </ion-col>
       </ion-row> <ion-row>
         <ion-col text-left>
-          经纬度
+          经度
         </ion-col>
         <ion-col text-right>
-          {{device.longitudeLatitude}}
+          <!--{{device.longitudeLatitude}}-->
+          {{strs[0]}}
+        </ion-col>
+      </ion-row><ion-row>
+        <ion-col text-left>
+          纬度
+        </ion-col>
+        <ion-col text-right>
+          <!--{{device.longitudeLatitude}}-->
+          {{strs[1]}}
         </ion-col>
       </ion-row><ion-row>
         <ion-col text-left>
@@ -82,7 +91,7 @@ export class InstallDevicePopover {
 
   public device;
   public status;
-
+  public strs  =new Array() ;
   public outputValue = new EventEmitter();
 
   public project={
@@ -93,6 +102,8 @@ export class InstallDevicePopover {
 
   constructor(public navCtrl:NavController ,public viewCtrl:ViewController,public navParams: NavParams) {
     this.device = navParams.get('device');
+    var str =this.device.longitudeLatitude;
+    this.strs=str.split(",");
     this.status=navParams.get("status");
     //util.hideLoading();
   }

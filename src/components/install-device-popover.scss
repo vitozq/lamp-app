@@ -19,6 +19,7 @@ install-device-popover{
     margin-left: auto;
     margin-right: auto;
     > *{
+      white-space: nowrap;
       color: color($colors,darkgray);
     }
   }
