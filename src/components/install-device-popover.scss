@@ -5,11 +5,20 @@ install-device-popover{
   }
 
   .device-title{
-    background: #fff;
     font-size: 16px;
     color: color($colors,primary);
-    img{
-      width: 30px;
+    .img-background{
+      background-color: #fff;
+      border-radius: 50px 50px 0px 0px;
+      width: 100px;
+      height: 50px;
+      margin-top: -30px;
+    }
+    .main-img{
+      width: 40px;
+      position: absolute;
+      margin-top: -20px;
+      margin-left: -70px;
     }
   }
 
@@ -32,8 +41,6 @@ install-device-popover{
   .color-0{
     color: #000;
   }
-  .margin-LR5{
-    margin-left: 5px;
-    margin-right: 8px;
-  }
+
+
 }

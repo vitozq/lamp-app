@@ -7,22 +7,17 @@ import {NavController, NavParams, ViewController} from 'ionic-angular';
 
 @Component({
   selector: 'install-device-popover',
-  template: `    
+  template: `
     <div>
       <ion-row class="device-title" text-center>
-        <ion-col text-right style="flex: 0 0 40%;">
-          <img    *ngIf="status=='new'" src="assets/imgs/popover/success@2x.png">
-          <img    *ngIf="status=='old'" src="assets/imgs/popover/warn@2x.png">
-          <img    *ngIf="status=='replace'" src="assets/imgs/popover/newSuccess@2x.png">
-        </ion-col>
-        <ion-col *ngIf="status=='new'" text-left style="align-self: center">
-          设备注册成功
-        </ion-col>
-        <ion-col *ngIf="status=='old'" text-left style="align-self: center">
-          设备已被注册
-        </ion-col>
-        <ion-col *ngIf="status=='replace'" text-left style="align-self: center">
-          设备替换成功
+        <ion-col>
+          <img src="assets/imgs/popover/background@2x.png" class="img-background">
+          <img *ngIf="status=='new'" src="assets/imgs/popover/success@2x.png" class="main-img">
+          <img *ngIf="status=='old'" src="assets/imgs/popover/warn@2x.png" class="main-img">
+          <img *ngIf="status=='replace'" src="assets/imgs/popover/newSuccess@2x.png" class="main-img">
+          <div *ngIf="status=='new'">设备注册成功</div>
+          <div *ngIf="status=='old'" style="color:#fdbe73">设备已被注册</div>
+          <div *ngIf="status=='replace'" style="color:#3cb3c3">设备替换成功</div>
         </ion-col>
       </ion-row>
       <div class="device-info">
@@ -47,36 +42,39 @@ import {NavController, NavParams, ViewController} from 'ionic-angular';
           <ion-col *ngIf="status=='replace'" text-right>
             未激活
           </ion-col>
-        </ion-row> <ion-row>
-        <ion-col text-left>
-          灯杆编号
-        </ion-col>
-        <ion-col text-right>
-          {{device.postNum}}
-        </ion-col>
-      </ion-row> <ion-row>
-        <ion-col text-left>
-          经纬度
-        </ion-col>
-        <ion-col text-right>
-          {{device.longitudeLatitude}}
-        </ion-col>
-      </ion-row><ion-row>
-        <ion-col text-left>
-          所属街道
-        </ion-col>
-        <ion-col text-right>
-          {{device.street}}
-        </ion-col>
-      </ion-row>
+        </ion-row>
+        <ion-row>
+          <ion-col text-left>
+            灯杆编号
+          </ion-col>
+          <ion-col text-right>
+            {{device.postNum}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col text-left>
+            经纬度
+          </ion-col>
+          <ion-col text-right>
+            {{device.longitudeLatitude}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col text-left>
+            所属街道
+          </ion-col>
+          <ion-col text-right>
+            {{device.street}}
+          </ion-col>
+        </ion-row>
       </div>
       <ion-row text-center>
-         <ion-col class="align-center" >
-           <button  ion-button (click)="confirm()" class="primary device-btn">确认 </button>
+        <ion-col>
+          <button ion-button (click)="confirm()" class="primary device-btn">确认</button>
         </ion-col>
       </ion-row>
-  </div>`,
-  inputs:['planId']
+    </div>`,
+  inputs: ['planId']
 })
 export class InstallDevicePopover {
 
@@ -85,28 +83,28 @@ export class InstallDevicePopover {
 
   public outputValue = new EventEmitter();
 
-  public project={
-      id:3,
-      name:'',
-      content:''
+  public project = {
+    id: 3,
+    name: '',
+    content: ''
   }
 
-  constructor(public navCtrl:NavController ,public viewCtrl:ViewController,public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, public navParams: NavParams) {
     this.device = navParams.get('device');
-    this.status=navParams.get("status");
+    this.status = navParams.get("status");
     //util.hideLoading();
   }
 
   //选择项目
-  choseProject(){
+  choseProject() {
   }
 
-  closePopover(){
+  closePopover() {
     this.viewCtrl.dismiss();
   }
 
   //添加项目
-  confirm(){
+  confirm() {
     this.viewCtrl.dismiss(this.project);
   }
 }
