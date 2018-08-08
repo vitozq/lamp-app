@@ -6,7 +6,6 @@ install-device-popover{
 
   .device-title{
     font-size: 16px;
-    color: color($colors,primary);
     .img-background{
       background-color: #fff;
       border-radius: 50px 50px 0px 0px;
@@ -36,12 +35,31 @@ install-device-popover{
   button{
     width: 100px !important;
     height: 35px !important;
+    .button-inner{
+      color: #fff;
+    }
   }
-
 
   .color-0{
     color: #000;
   }
-
+  .color-new{
+    color: color($colors,primary);
+  }
+  .color-old{
+    color: #fdbe73;
+  }
+  .color-replace{
+    color: #3cb3c3;
+  }
+  .btn-color-new{
+    background-color: color($colors,primary);
+  }
+  .btn-color-old{
+    background-color: #fdbe73;
+  }
+  .btn-color-replace{
+    background-color: #3cb3c3;
+  }
 
 }
