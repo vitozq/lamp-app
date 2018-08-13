@@ -137,7 +137,7 @@ export class ItemInfoPage {
           this.showPopover({device:res,status:'old'});
         }else{
           // console.log(barcodeData+res.modelNum);
-          this.navCtrl.push("InstallDevicePage",{barcodeData:barcodeData,modelNum:res.modelNum,street:this.street,installPower:this.installPower,status:'replace',oldDevice:this.item.device});
+          this.navCtrl.push("InstallDevicePage",{barcodeData:barcodeData,modelNum:res.modelNum,street:this.street,installPower:this.installPower,status:'replace',oldDevice:this.item.device,frId:this.item.frId});
           /** 禁止重复安装注册**/
           // if(res.deviceId==null||res.deviceId==''){
           //   this.navCtrl.push("InstallDevicePage",{barcodeData:barcodeData,modelNum:res.modelNum,street:this.result});

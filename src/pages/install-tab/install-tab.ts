@@ -43,7 +43,7 @@ export class InstallTabPage {
   //
   //
   test1(){
-    this.forward("868744034082721");
+    this.forward("123");
     // this.navCtrl.push("InstallDevicePage",{barcodeData:123,modelNum:123,street:this.street,installPower:this.installPower});
   }
 

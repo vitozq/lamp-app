@@ -34,7 +34,10 @@ export class InstallDevicePage {
     latitude: '获取中',//维度
     longitude: '获取中'//经度
   };
-
+  // currentPosition: any = {
+  //   latitude: '0',//维度
+  //   longitude: '0'//经度
+  // };
   //所属街道
   street: Item[];
   //电池选择
@@ -61,7 +64,7 @@ export class InstallDevicePage {
     this.installPower=navParams.get("installPower");
     this.status= navParams.get("status");
     this.oldDevice=navParams.get("oldDevice");
-    if(status=='replace'){
+    if(this.status=='replace'){
       this.postNum= this.oldDevice.postNum;
     }
   }
@@ -134,9 +137,18 @@ export class InstallDevicePage {
                 }
               );
               seq.subscribe((res: any) => {
-                if(status=='new'){
+                if(res==null){
+                  const alert = this.alertCtrl.create({
+                    title: '提示信息',
+                    subTitle:'设备注册失败，请检查网络是否异常',
+                    buttons: ['确定']
+                  });
+                  alert.present();
+                  return;
+                }
+                if(this.status=='new'){
                 this.prompt("设备注册成功");
-                }else  if(status=='replace'){
+                }else  if(this.status=='replace'){
                   this.prompt("设备替换成功");
                 }
                 this.navCtrl.setRoot(Tab0Root);
@@ -144,6 +156,12 @@ export class InstallDevicePage {
               }, err => {
                 console.log("失败");
                 console.error('ERROR', err);
+                const alert = this.alertCtrl.create({
+                  title: '提示信息',
+                  subTitle:'设备注册失败，请检查网络是否异常',
+                  buttons: ['确定']
+                });
+                alert.present();
               });
 
             }
@@ -187,7 +205,11 @@ export class InstallDevicePage {
 
   validate(){
     var error ;
-      if(this.power==null||this.power==''){
+    var j=this.currentPosition.longitude;
+    var w=this.currentPosition.latitude;
+    if(j==null||j=='获取中'||w==null||w=='获取中'){
+      error='请经纬度获取成功后再提交信息';
+    } else if(this.power==null||this.power==''){
           error='请选择灯瓦数再提交信息';
       } else if(this.selected==null||this.selected==''){
         error='请选择街道后再提交信息';
