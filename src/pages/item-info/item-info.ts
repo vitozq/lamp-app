@@ -56,6 +56,12 @@ export class ItemInfoPage {
                 //成功解除故障后将button框失效
                 this.item.currentStatus=0;
                 this.isDone();
+                const alert = this.alertCtrl.create({
+                  title: '故障消除',
+                  subTitle: '故障已消除成功，任务已完成！',
+                  buttons: ['确定']
+                });
+                alert.present();
             },err=>{
               console.error('ERROR',err);
             });
