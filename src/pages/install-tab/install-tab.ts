@@ -43,7 +43,7 @@ export class InstallTabPage {
   //
   //
   test1(){
-    this.forward("123");
+    this.forward("868744034082721");
     // this.navCtrl.push("InstallDevicePage",{barcodeData:123,modelNum:123,street:this.street,installPower:this.installPower});
   }
 
@@ -63,8 +63,10 @@ export class InstallTabPage {
       disableSuccessBeep: true //禁用扫描成功后哔哔声(iOS)
     };
     this.barcodeScanner.scan(options).then(barcodeData => {
-      this.scanInfo = barcodeData;
-      this.forward(barcodeData.text);
+      if(barcodeData!=null) {
+        this.forward(barcodeData.text);
+        this.scanInfo = barcodeData;
+      }
     }).catch(err => {
       console.log('Error', err);
     });

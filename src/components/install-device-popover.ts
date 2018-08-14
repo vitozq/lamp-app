@@ -33,14 +33,20 @@ import {NavController, NavParams, ViewController} from 'ionic-angular';
           <ion-col text-left>
             设备激活状态
           </ion-col>
-          <ion-col *ngIf="status=='new'" text-right>
+          <ion-col *ngIf="deviceStatus=='0'" text-right>
             未激活
           </ion-col>
-          <ion-col *ngIf="status=='old'" text-right>
+          <ion-col *ngIf="deviceStatus=='1'" text-right>
             已激活
           </ion-col>
-          <ion-col *ngIf="status=='replace'" text-right>
-            未激活
+          <ion-col *ngIf="deviceStatus=='2'" text-right>
+            待维修
+          </ion-col>
+          <ion-col *ngIf="deviceStatus=='3'" text-right>
+            已欠费
+          </ion-col>
+          <ion-col *ngIf="deviceStatus=='4'" text-right>
+             已废弃
           </ion-col>
         </ion-row>
         <ion-row>
@@ -96,7 +102,7 @@ export class InstallDevicePopover {
   public status;
   public strs  =new Array() ;
   public outputValue = new EventEmitter();
-
+  public deviceStatus;
   public project={
       id:3,
       name:'',
@@ -108,6 +114,8 @@ export class InstallDevicePopover {
     var str =this.device.longitudeLatitude;
     this.strs=str.split(",");
     this.status=navParams.get("status");
+    this.deviceStatus=this.device.deviceStatus;
+    console.log("转台"+this.deviceStatus);
     //util.hideLoading();
   }
 

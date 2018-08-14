@@ -93,7 +93,11 @@ export class InstallDevicePage {
   install() {
     // this.validate();
     var error ;
-    if(this.power==null||this.power==''){
+    var  longitude =this.currentPosition.longitude;
+    var  latitude = this.currentPosition.latitude;
+    if(longitude==null||longitude=='获取中'||latitude==null||latitude=='获取中'){
+      error='请经纬度获取成功后再提交信息';
+    } else if(this.power==null||this.power==''){
       error='请选择灯瓦数再提交信息';
     } else if(this.selected==null||this.selected==''){
       error='请选择街道后再提交信息';
