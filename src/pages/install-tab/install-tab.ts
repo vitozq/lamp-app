@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, PopoverController, ToastController} from 'ionic-angular';
+import {AlertController, IonicPage, NavController, NavParams, PopoverController, ToastController} from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Api} from '../../providers/api/api';
 import {InstallDevicePopover} from "../../components/install-device-popover";
@@ -23,18 +23,21 @@ export class InstallTabPage {
   street:any;
   installPower:any;
   device:any;
+  alreadyInstallList:any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private barcodeScanner:BarcodeScanner,
               private api:Api,
               public  toastCtrl :ToastController,
-              public popoverCtrl:PopoverController) {
+              public popoverCtrl:PopoverController,
+              public alertCtrl:AlertController) {
 
     this.device=this.navParams.get("device");
   }
 
   ionViewDidLoad() {
     // this.device=this.forwardInstall.device;
+    this.getInstallRecord(localStorage.getItem("username"));
     console.log('ionViewDidLoad InstallTabPage');
   }
   // scan(){
@@ -128,7 +131,19 @@ export class InstallTabPage {
       console.error('ERROR',err);
     });
   }
-
+  /**
+   * 获取已安装设备
+   */
+  getInstallRecord(username){
+    let seq=this.api.post("getInstallRecord",username);
+    seq.subscribe( (res: any) =>{
+      this.alreadyInstallList=res;
+      // console.log("已安装设备"+JSON.stringify(this.alreadyInstallList));
+    },err =>{
+      console.error('ERROR',err);
+    });
+  }
+  //弹出提示框
   prompt(msg){
     let toast = this.toastCtrl.create({
       message: msg,
@@ -137,7 +152,7 @@ export class InstallTabPage {
     });
     toast.present();
   }
-
+  //弹出模态框
   showPopover(data){
     let popover = this.popoverCtrl.create(InstallDevicePopover,{device:data.device,status:data.status});
     popover.present({
@@ -145,4 +160,39 @@ export class InstallTabPage {
     });
   }
 
+
+  //查看已安装设备信息
+  openItem(item,status){
+    let popover = this.popoverCtrl.create(InstallDevicePopover,{device:item,status:status});
+    popover.present({
+      // ev: event
+    });
+  }
+
+  //调试设备
+  debugDevice(item){
+     const confirm =this.alertCtrl.create({
+       title: "",
+       message: "是否进行调试(调试亮灯时长为1分钟)开灯?" ,
+       buttons: [
+         {
+           text: '取消',
+           handler: () => {
+           }
+         },
+         {
+           text: '确定',
+           handler: () => {
+             let seq=  this.api.post("debugDevice",{deviceId:item.deviceId,command:'0100',time:'1',watt:'50'});
+             seq.subscribe((res:any) =>{
+               console.log(JSON.stringify(res));
+             },err=>{
+               console.error('ERROR',err);
+             });
+           }
+         }
+       ]
+     });
+    confirm.present();
+  }
 }

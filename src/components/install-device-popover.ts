@@ -12,12 +12,14 @@ import {NavController, NavParams, ViewController} from 'ionic-angular';
       <ion-row class="device-title" text-center>
         <ion-col>
           <img src="assets/imgs/popover/background@2x.png" class="img-background">
+          <img *ngIf="status=='look'" src="assets/imgs/popover/success@2x.png" class="main-img">
           <img *ngIf="status=='new'" src="assets/imgs/popover/success@2x.png" class="main-img">
           <img *ngIf="status=='old'" src="assets/imgs/popover/warn@2x.png" class="main-img">
           <img *ngIf="status=='replace'" src="assets/imgs/popover/newSuccess@2x.png" class="main-img">
           <div *ngIf="status=='new'" class="color-new">设备注册成功</div>
           <div *ngIf="status=='old'" class="color-old">设备已被注册</div>
           <div *ngIf="status=='replace'" class="color-replace">设备替换成功</div>
+          <div *ngIf="status=='look'" class="color-replace">查看设备信息</div>
         </ion-col>
       </ion-row>
       <div class="device-info">
