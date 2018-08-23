@@ -127,7 +127,7 @@ export class InstallDevicePage {
           {
             text: '确定',
             handler: () => {
-              let seq = this.api.post("register", {
+              let seq = this.api.post("install", {
                   imeiCode: this.imeiCode,
                   medelNum: this.modelNum,
                   power: this.power,
